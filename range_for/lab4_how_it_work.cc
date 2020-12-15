@@ -1,10 +1,5 @@
 #include <iostream>
 
-/**
-* 1. 该类支持begin()和end()迭代器(缺一不可).
-* 2. 该迭代器重载!=, ++, *方法.
-*/
-
 template<class T>
 class RangeIterator {
 public:
@@ -15,11 +10,13 @@ public:
     }
 
     RangeIterator &operator++() {
+        std::cout << "------ operator++() callbed." << std::endl;
         val_ += step_;
         return *this;
     }
 
     bool operator!=(const RangeIterator &other) {
+        std::cout << "------ operator!=() callbed." << std::endl;
         if (step_ > 0) {
             return val_ < other.val_;    
         }
@@ -41,10 +38,12 @@ public:
         :begin_(begin, step), end_(end, step) {}
 
     RangeIterator<T> begin() {
+        std::cout << "------ begin() callbed." << std::endl;
         return begin_;
     }
 
     RangeIterator<T> end() {
+        std::cout << "------ end() callbed." << std::endl;
         return end_;
     }
 
@@ -57,9 +56,8 @@ private:
 int main() {
     Range<int> my_range = {/*begin=*/0, /*end=*/5, /*step=*/2};
     for (auto val : my_range) {
-        std::cout << val << " ";
+        std::cout << val << std::endl;
     }
-    std::cout << std::endl;
 
     return 0;
  }
